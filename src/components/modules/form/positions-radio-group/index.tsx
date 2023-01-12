@@ -4,29 +4,24 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { useFormikContext } from "formik";
 import React, { FC } from "react";
-import { InitialValuesFormik } from "..";
 import { Position } from "../../../../types/type";
 
 type PositionsRadioGroupProps = {
   positions: Position[];
+  onChangePosition: (value: string, id: number) => void;
 };
 
 export const PositionsRadioGroup: FC<PositionsRadioGroupProps> = ({
   positions,
+  onChangePosition,
 }) => {
-  const { values, handleChange } = useFormikContext<InitialValuesFormik>();
-
   return (
     <FormControl>
       <div>Select your position</div>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="female"
         name="positions"
-        value={values.position}
-        onChange={handleChange}
       >
         {positions.length &&
           positions.map((pos) => (
@@ -36,6 +31,7 @@ export const PositionsRadioGroup: FC<PositionsRadioGroupProps> = ({
               control={<Radio color="secondary" />}
               label={pos.name}
               key={pos.id}
+              onChange={() => onChangePosition(pos.name, pos.id)}
             />
           ))}
       </RadioGroup>

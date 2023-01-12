@@ -18,7 +18,7 @@ export type InitialValuesFormik = {
   name: string;
   email: string;
   phone: string;
-  position: string;
+  position: { id: number; name: string };
   image: string;
 };
 
@@ -26,7 +26,7 @@ const initialValues = {
   name: "",
   email: "",
   phone: "",
-  position: "",
+  position: { id: null, name: "" },
   image: "",
 };
 
@@ -35,7 +35,7 @@ export const PostForm: FC<FormProps> = ({ positions }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, formikHelper) => {
-        console.log(values);
+        console.log("posted", values);
       }}
       validationSchema={schema}
     >
@@ -58,6 +58,10 @@ export const PostForm: FC<FormProps> = ({ positions }) => {
 
         const onUploadImage = (value: string) => {
           setFieldValue("image", value);
+        };
+
+        const onChangePosition = (value: string, id: number) => {
+          setFieldValue("position", { value, id });
         };
 
         return (
@@ -107,7 +111,10 @@ export const PostForm: FC<FormProps> = ({ positions }) => {
               )}
             </InputMask>
 
-            <PositionsRadioGroup positions={positions} />
+            <PositionsRadioGroup
+              positions={positions}
+              onChangePosition={onChangePosition}
+            />
             <UploadImage
               image={values.image}
               onUploadImage={onUploadImage}
