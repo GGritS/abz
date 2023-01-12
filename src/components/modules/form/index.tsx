@@ -57,7 +57,7 @@ export const PostForm: FC<FormProps> = ({ positions }) => {
         };
 
         const onUploadImage = (value: string) => {
-          setFieldValue("phone", value);
+          setFieldValue("image", value);
         };
 
         return (
