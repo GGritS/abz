@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Component1 } from "./components/component1";
+import { GetModule } from "./components/modules/get-module";
+import { Header } from "./components/modules/header";
+import { PostModule } from "./components/modules/post-module";
+import { useIsMobile } from "./hooks/use-is-mobile";
 
 function App() {
+  const isMobile = useIsMobile();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header type={isMobile ? "mobile" : "desktop"} />
+      <div className="content">
+        <Component1 />
+        <GetModule />
+        <PostModule />
+      </div>
     </div>
   );
 }

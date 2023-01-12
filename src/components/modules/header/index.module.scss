@@ -1,0 +1,45 @@
+.wrapper {
+  background: #ffffff;
+  width: 100%;
+
+  .content {
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.buttons {
+  display: flex;
+  column-gap: 10px;
+}
+.mobile {
+  padding: 13px 16px;
+}
+
+.desktop {
+  padding: 13px 60px;
+}
+
+@media screen and (min-width: 2560px) {
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .content {
+      width: 45.6%;
+    }
+  }
+  .desktop {
+    padding: 13px 0px;
+  }
+  .mobile {
+    padding: 0;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 2559px) {
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+@media screen and (min-width: 360px) and (max-width: 767px) {
+}

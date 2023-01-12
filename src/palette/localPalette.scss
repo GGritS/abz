@@ -1,0 +1,22 @@
+.primaryBtn {
+  background: #f4e041;
+  &:hover {
+    transition-duration: 0.2s;
+    background-color: #ffe302;
+  }
+}
+
+.secondaryBtn {
+  background: #00bdd3;
+  &:hover {
+    transition-duration: 0.2s;
+    background-color: #00a6b9;
+  }
+}
+
+.disabledBtn {
+  background: #b4b4b4;
+  color: #fff;
+  cursor: unset;
+  pointer-events: none;
+}
