@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/abz/static/css/main.ded7c89e.css",
-    "main.js": "/abz/static/js/main.12b4e6bf.js",
+    "main.js": "/abz/static/js/main.f368c651.js",
     "static/js/787.be453b68.chunk.js": "/abz/static/js/787.be453b68.chunk.js",
-    "static/media/pexels-alexandr-podvalny-1227513.jpeg": "/abz/static/media/pexels-alexandr-podvalny-1227513.be7665f876bbd9138501.jpeg",
+    "static/media/pexels2mb.jpg": "/abz/static/media/pexels2mb.4d9c1df7309b5db43cef.jpg",
     "static/media/success-image.svg": "/abz/static/media/success-image.0d3202ba11b04fa7364b0f83ce42aea5.svg",
     "static/media/Logo.svg": "/abz/static/media/Logo.8bb55362d01d55393ccc5476d96f0c14.svg",
     "static/media/noAvatar.jpeg": "/abz/static/media/noAvatar.522560c8ca5313e66b8c.jpeg",
     "index.html": "/abz/index.html",
     "main.ded7c89e.css.map": "/abz/static/css/main.ded7c89e.css.map",
-    "main.12b4e6bf.js.map": "/abz/static/js/main.12b4e6bf.js.map",
+    "main.f368c651.js.map": "/abz/static/js/main.f368c651.js.map",
     "787.be453b68.chunk.js.map": "/abz/static/js/787.be453b68.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ded7c89e.css",
-    "static/js/main.12b4e6bf.js"
+    "static/js/main.f368c651.js"
   ]
 }
