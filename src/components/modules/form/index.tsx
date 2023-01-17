@@ -1,67 +1,61 @@
 import { TextField } from "@mui/material";
 import { Form, Formik } from "formik";
-import React, { ChangeEvent, FC } from "react";
+import React, { FC } from "react";
 import { Button } from "../button";
 
 import style from "./index.module.scss";
 import { UploadImage } from "./uploadImage";
 import { schema } from "./validateSchema";
-import InputMask from "react-input-mask";
 import { Position } from "../../../types/type";
 import { PositionsRadioGroup } from "./positions-radio-group";
+import useSubimitForm from "./useSubimitForm";
 
 type FormProps = {
   positions: Position[];
 };
 
-export type InitialValuesFormik = {
+export type ValuesFormik = {
   name: string;
   email: string;
   phone: string;
-  position: { id: number; name: string };
-  image: string;
+  position_id: string;
+  photo: string;
 };
 
-const initialValues = {
+const initialValues: ValuesFormik = {
   name: "",
   email: "",
   phone: "",
-  position: { id: null, name: "" },
-  image: "",
+  position_id: "1",
+  photo: "",
 };
 
 export const PostForm: FC<FormProps> = ({ positions }) => {
+  const onSubmit = useSubimitForm();
+
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values, formikHelper) => {
-        console.log("posted", values);
-      }}
+      onSubmit={onSubmit}
       validationSchema={schema}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        /* and other goodies */
-        setFieldValue,
-        dirty,
-      }) => {
-        const onChangePhoneNumber = (event: ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value;
-          setFieldValue("phone", value);
-        };
+      {(formikProps) => {
+        const {
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          dirty,
+        } = formikProps;
 
-        const onUploadImage = (value: string) => {
-          setFieldValue("image", value);
-        };
+        const onUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+          const file = event.target.files?.[0];
 
-        const onChangePosition = (value: string, id: number) => {
-          setFieldValue("position", { value, id });
+          if (file) {
+            setFieldValue("photo", file);
+          }
         };
 
         return (
@@ -91,34 +85,28 @@ export const PostForm: FC<FormProps> = ({ positions }) => {
               error={errors.email && touched.email ? true : false}
               helperText={errors.email && touched.email && errors.email}
             />
-            <InputMask
-              maskChar={null}
-              mask="+38 (099) 999 99 99"
-              onChange={onChangePhoneNumber}
-            >
-              {() => (
-                <TextField
-                  id="outlined-phone"
-                  type="tel"
-                  name="phone"
-                  label="Phone"
-                  placeholder="Phone"
-                  variant="outlined"
-                  color="secondary"
-                  error={errors.phone && touched.phone ? true : false}
-                  helperText={errors.phone && touched.phone && errors.phone}
-                />
-              )}
-            </InputMask>
 
-            <PositionsRadioGroup
-              positions={positions}
-              onChangePosition={onChangePosition}
+            <TextField
+              id="outlined-phone"
+              type="tel"
+              name="phone"
+              label="Phone"
+              placeholder="Phone"
+              variant="outlined"
+              color="secondary"
+              value={values.phone}
+              error={errors.phone && touched.phone ? true : false}
+              helperText={errors.phone && touched.phone && errors.phone}
+              onChange={handleChange}
             />
+
+            <PositionsRadioGroup positions={positions} />
+
             <UploadImage
-              image={values.image}
-              onUploadImage={onUploadImage}
-              error={errors.image && touched.image ? true : false}
+              photo={values.photo}
+              onUploadImage={onUploadFile}
+              error={errors.photo && touched.photo ? true : false}
+              helperText={errors.photo}
             />
             <div className={style.buttonWrapper}>
               <Button color={dirty ? "primary" : "disabled"} type="submit">

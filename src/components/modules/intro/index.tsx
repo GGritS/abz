@@ -1,12 +1,17 @@
 import React, { FC } from "react";
-import { Button } from "../modules/button";
+import { Button } from "../button";
 import cn from "classnames";
 
-import style from "./index.module.scss";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-export const Component1: FC = () => {
+import style from "./index.module.scss";
+import pexels from "./../../../sources/images/pexels.avif";
+
+export const Intro: FC = () => {
   return (
     <div className={style.wrapper}>
+      <LazyLoadImage src={pexels} className={style.img} />
+      <div className={style.shadow}></div>
       <div className={style.content}>
         <h1 className={cn(style.title, style.text)}>
           Test assignment for front-end developer

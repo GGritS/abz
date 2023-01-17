@@ -25,25 +25,13 @@ export const Card: FC<CardProps> = ({
     <div className={style.wrapper}>
       <div className={style.content}>
         <Image image={photo} />
-        <Tooltip title={name}>
-          <div
-            className={cn(style.text, style.name)}
-            style={{ position: "relative" }}
-          >
-            {name}
-          </div>
+        <Tooltip title={name} wrapperClasses={style.name}>
+          {name}
         </Tooltip>
         <div>
-          <Tooltip title={position}>
-            <p className={style.text}>{position}</p>
-          </Tooltip>
-          <Tooltip title={email}>
-            <p className={style.text}>{email}</p>
-          </Tooltip>
-
-          <Tooltip title={phone}>
-            <p className={style.text}>{phone}</p>
-          </Tooltip>
+          <Tooltip title={position}>{position}</Tooltip>
+          <Tooltip title={email}>{email}</Tooltip>
+          <Tooltip title={phone}>{phone}</Tooltip>
         </div>
       </div>
     </div>
