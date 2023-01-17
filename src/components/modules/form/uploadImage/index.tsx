@@ -4,8 +4,8 @@ import style from "./index.module.scss";
 import cn from "classnames";
 
 type UploadImageProps = {
-  image: string;
-  onUploadImage: (value: string) => void;
+  photo: string;
+  onUploadImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
   helperText?: string;
   error?: boolean;
   required?: boolean;
@@ -13,29 +13,14 @@ type UploadImageProps = {
 
 export const UploadImage: FC<UploadImageProps> = ({
   required = false,
-  image,
-  onUploadImage: onSetImage,
+  photo,
+  onUploadImage,
   error,
   helperText,
 }) => {
   const [inputText, setInputText] = useState<string>("");
-  const isImage =
-    image?.split("").slice(4, 11).join("") === ":image/" ? true : false;
-
-  const uploadImage = async (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files ? event.target.files[0] : undefined;
-    if (files) {
-      let reader = new FileReader();
-      reader.readAsDataURL(files);
-
-      reader.onload = () => {
-        const imageSrc = reader.result ? reader.result.toString() : undefined;
-        if (imageSrc) {
-          onSetImage(imageSrc);
-        }
-      };
-    }
-  };
+  const inputValidation =
+    (typeof photo === "string" && photo !== "") || inputText?.length > 0;
   return (
     <div className={style.wrapper}>
       <div className={style.imageInput}>
@@ -43,16 +28,14 @@ export const UploadImage: FC<UploadImageProps> = ({
           <input
             type="file"
             id="addImage"
-            accept="image/*"
+            accept="image/jpg, image/jpeg"
             style={{ display: "none" }}
-            onChange={(e) => {
-              uploadImage(e);
-            }}
+            onChange={onUploadImage}
             required={required}
           />
           <div
             className={cn(style.button, style.text, {
-              [style.buttonError]: (!isImage && inputText !== "") || error,
+              [style.buttonError]: error,
             })}
           >
             Upload
@@ -61,21 +44,23 @@ export const UploadImage: FC<UploadImageProps> = ({
         <input
           type="text"
           className={cn(style.input, style.text, {
-            [style.inputError]: (!isImage && inputText !== "") || error,
+            [style.inputError]: error,
           })}
           placeholder="Upload your photo"
           onChange={(e) => setInputText(e.target.value)}
-          value={isImage ? "Item" : inputText}
+          value={photo === "" ? inputText : "Item"}
         />
       </div>
-      {error ? (
-        <p className={cn(style.helperText, style.helperTextError)}>Required</p>
-      ) : !isImage && inputText !== "" ? (
+      {inputValidation ? (
         <p className={cn(style.helperText, style.helperTextError)}>
           Error text
         </p>
       ) : (
-        ""
+        error && (
+          <p className={cn(style.helperText, style.helperTextError)}>
+            {helperText}
+          </p>
+        )
       )}
     </div>
   );

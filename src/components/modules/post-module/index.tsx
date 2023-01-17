@@ -1,24 +1,22 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { PostForm } from "../form";
 
 import style from "./index.module.scss";
-import successImg from "./../../../sources/images/success-image.svg";
 import { usePositions } from "../../../hooks/usePositions";
 import { Loader } from "../loader";
+import { Outro } from "../outro";
+import { useUsersContext } from "../../../hooks/useUsersContext";
 
 export const PostModule: FC = () => {
-  const [isUserRegistred, setIsUserRegistred] = useState(false);
   const { value, loading } = usePositions();
+  const { isUserRegistered } = useUsersContext();
 
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
-        {isUserRegistred ? (
+        {isUserRegistered ? (
           <>
-            <h1 className={style.title}>User successfully registered</h1>
-            <div className={style.imgWrapper}>
-              <img src={successImg} alt="" />
-            </div>
+            <Outro />
           </>
         ) : (
           <div className={style.formWrapper}>

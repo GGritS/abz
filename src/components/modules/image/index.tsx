@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import style from "./index.module.scss";
 import noAvatar from "./../../../sources/images/noAvatar.jpeg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 type ImageProps = {
   image: string | undefined;
@@ -11,7 +12,7 @@ type ImageProps = {
 export const Image: FC<ImageProps> = ({ image, type }) => {
   return (
     <div className={style.wrapper}>
-      <img src={!image ? noAvatar : image} alt="avatar" className={style.img} />
+      <LazyLoadImage src={image ? image : noAvatar} className={style.img} />
     </div>
   );
 };

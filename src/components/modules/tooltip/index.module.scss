@@ -1,12 +1,7 @@
 .wrapper {
   position: relative;
-  cursor: pointer;
-
-  &:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-    z-index: 2;
-  }
+  width: 100%;
+  text-align: center;
 }
 
 .tooltip {
@@ -25,13 +20,36 @@
   background-color: #000;
   color: #fff;
 
-  // white-space: nowrap;
   padding: 8px 15px;
   border-radius: 7px;
+
   visibility: hidden;
   opacity: 0;
-  // visibility: visible;
-  // opacity: 1;
+
   transition: opacity 0.5s ease;
   z-index: 2;
+}
+
+.text {
+  cursor: pointer;
+
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+
+  text-align: center;
+
+  color: rgba(0, 0, 0, 0.87);
+  display: -webkit-box;
+  -webkit-line-clamp: 1; // количество строк
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.text:hover + .tooltip {
+  visibility: visible;
+  opacity: 1;
 }
